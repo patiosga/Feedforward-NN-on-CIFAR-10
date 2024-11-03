@@ -14,7 +14,7 @@ x_train = x_train[:900]
 y_train = y_train[:900]
 
 # Perform t-SNE
-tsne = TSNE(n_components=3, random_state=42)
+tsne = TSNE(n_components=2, random_state=42)
 x_train_tsne = tsne.fit_transform(x_train)
 
 # Plot the results
