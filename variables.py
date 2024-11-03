@@ -12,4 +12,4 @@ labels: dict[int: str] = {
     9: 'truck'
 }
 
-pca_components:int = 448  # μετά από PCA analysis στο ομόνυμο αρχείο - τόσα components χρειάζονται για το 98% της διακύμανσης μετά την κανονικοποίηση
+pca_components:int = 221  # μετά από PCA analysis στο ομόνυμο αρχείο - τόσα components χρειάζονται για το 95% της διακύμανσης μετά την κανονικοποίηση

@@ -16,8 +16,8 @@ def pca_experiment(data):
     cumsum: int = 0
     for i, explained_variance_ratio in enumerate(pca.explained_variance_ratio_):
         cumsum += explained_variance_ratio
-        if cumsum >= 0.98:  # σταματάει όταν το cumsum γίνει >= 0.98
-            print(f'Number of components required to explain 98% of the variance: {i + 1}')
+        if cumsum >= 0.95:  # σταματάει όταν το cumsum γίνει >= 0.95
+            print(f'Number of components required to explain 95% of the variance: {i + 1}')
             break
     # 448 principal components !!!
 
