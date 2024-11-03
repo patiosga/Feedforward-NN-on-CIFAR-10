@@ -1,55 +1,59 @@
 import numpy as np
-import torch
-from torchvision import datasets, transforms
 from sklearn.neighbors import KNeighborsClassifier
+import variables as var
+from pca_analysis import pca_decomposition
+from read_data import read_data, read_test_data
+from normalize_data import normalize_data
+from accuracy_metrics import cls_report
 
 
-# Labels dictionary
-labels = {
-    0: 'airplane',
-    1: 'automobile',
-    2: 'bird',
-    3: 'cat',
-    4: 'deer',
-    5: 'dog',
-    6: 'frog',
-    7: 'horse',
-    8: 'ship',
-    9: 'truck'
-}
+# Perform k-NN classification on the CIFAR-10 dataset before and after PCA
+def knn_experiment(data, labels, test_data, test_labels, neighbors, PCA=False):
+    if PCA == True:
+        data = pca_decomposition(data, var.pca_components)
+        test_data = pca_decomposition(test_data, var.pca_components)
+                                      
+    # Create and fit k-NN classifier
+    knn = KNeighborsClassifier(n_neighbors=neighbors)
+    knn.fit(data, labels)
+    # Predict labels for test data
+    predicted_labels = knn.predict(test_data)
+    # Calculate accuracy
+    class_report = cls_report(test_labels, predicted_labels)
 
-# Load and transform the CIFAR-10 dataset
-transform = transforms.Compose([
-    transforms.ToTensor(),  # Convert images to PyTorch tensors
-    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))  # Normalize
-])
+    return class_report
 
-# Load CIFAR-10 dataset (you can specify train=False for the test set)
-train_dataset = datasets.CIFAR10(root='./data', train=True, download=False, transform=transform)
 
-# Convert the dataset to NumPy arrays
-X = []  # Feature matrix
-y = []  # Labels
+def run_knn(data, labels, test_data, test_labels, neighbors, PCA=False):
+    # Perform k-NN classification on the CIFAR-10 dataset before and after PCA
+    # Number of neighbors = 1
+    print(f'Number of neighbors = {neighbors}')
+    print('----------------------')
+    class_report_before_pca = knn_experiment(data, labels, test_data, test_labels, neighbors)
+    class_report_after_pca = knn_experiment(data, labels, test_data, test_labels, neighbors, PCA=True)
 
-for img, label in train_dataset[:100]:
-    # Flatten the image (3, 32, 32) -> (3072,)
-    img_flat = img.numpy().flatten()
-    X.append(img_flat)
-    y.append(label)
+    print('Before PCA:')
+    print(class_report_before_pca)
+    print('')
+    print('After PCA:')
+    print(class_report_after_pca)
+    print('')
+    print('')
 
-# Convert to NumPy arrays
-X = np.array(X)
-y = np.array(y)
 
-# Create a KNN classifier
-knn = KNeighborsClassifier(n_neighbors=3, n_jobs=1)
+def main():
+    training_data, training_labels = read_data()
+    test_data, test_labels = read_test_data()
 
-# Fit the model on the training data
-knn.fit(X, y)  # Fit on the first 100 samples for demonstration
+    # Normalize the data
+    training_data = normalize_data(training_data)
+    test_data = normalize_data(test_data)
 
-# Example: Query with a specific image (here we take the first image as an example)
-query_image = X[100].reshape(1, -1)  # Reshape to 1 sample with 3072 features
-predicted_label = knn.predict(query_image)
+    # Run k-NN classification
+    # run_knn(training_data, training_labels, test_data, test_labels, 1)
+    run_knn(training_data, training_labels, test_data, test_labels, 3)
 
-print(f"Predicted label for the query image: {labels[predicted_label[0]]}")
-print("Actual label for the query image: ", labels[y[0]])
+
+if __name__ == '__main__':
+    main()
+

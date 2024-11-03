@@ -1,52 +1,48 @@
 from sklearn.neighbors import NearestCentroid
-from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
 import numpy as np
+import variables as var
+from pca_analysis import pca_decomposition
+from read_data import read_data, read_test_data
+from normalize_data import normalize_data
+from accuracy_metrics import cls_report
+
+
+def nearest_centroid_experiment(data, labels, test_data, test_labels, PCA=False):
+    if PCA == True:
+        data = pca_decomposition(data, var.pca_components)
+        test_data = pca_decomposition(test_data, var.pca_components)
+                                      
+    # Create and fit k-NN classifier
+    nearest_centroid = NearestCentroid()
+    nearest_centroid.fit(data, labels)
+    # Predict labels for test data
+    predicted_labels = nearest_centroid.predict(test_data)
+    # Calculate accuracy
+    class_report = cls_report(test_labels, predicted_labels)
+
+    return class_report
 
 
 def main():
-    # Define transforms for data augmentation and normalization
-    print("Defining tranforms for data augmentation and normalization...")
-    transform_train = transforms.Compose([
-        transforms.RandomCrop(32, padding=4),   # Random crop with padding
-        transforms.RandomHorizontalFlip(),      # Random horizontal flip
-        transforms.ToTensor(),                  # Convert image to PyTorch tensor
-        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))  # Normalize with mean and std
-    ])
+    training_data, training_labels = read_data()
+    test_data, test_labels = read_test_data()
 
-    transform_test = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
-    ])
+    # Normalize the data
+    training_data = normalize_data(training_data)
+    test_data = normalize_data(test_data)
 
-    # Load CIFAR-10 training dataset
-    print("Loading CIFAR-10 training dataset...")
-    train_dataset = datasets.CIFAR10(root='./data', train=True, download=False, transform=transform_train)
-    test_dataset = datasets.CIFAR10(root='./data', train=False, download=False, transform=transform_test)
+    # Perform nearest centroid classification on the CIFAR-10 dataset before and after PCA
+    class_report_before_pca = nearest_centroid_experiment(training_data, training_labels, test_data, test_labels)
+    class_report_after_pca = nearest_centroid_experiment(training_data, training_labels, test_data, test_labels, PCA=True)
 
-    # Convert the dataset to NumPy arrays
-    X = []  # Feature matrix
-    y = []  # Labels
-
-    for img, label in train_dataset:
-        # Flatten the image (3, 32, 32) -> (3072,)
-        img_flat = img.numpy().flatten()
-        X.append(img_flat)
-        y.append(label)
-
-    query_image = test_dataset[0][0].numpy().flatten()
-
-    # Convert to NumPy arrays
-    X = np.array(X)
-    y = np.array(y)
-
-
-    clf = NearestCentroid()
-    clf.fit(X, y)
-
-    print(f"Predicted label for the query image: {clf.predict(query_image.reshape(1, -1))[0]}")
-    print("Actual label for the query image: ", test_dataset[0][1])
-
+    print('Before PCA:')
+    print(class_report_before_pca)
+    print('')
+    print('After PCA:')
+    print(class_report_after_pca)
+    print('')
+    print('')
+    
 
 if __name__ == '__main__':
     main()
