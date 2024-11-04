@@ -7,7 +7,6 @@ from normalize_data import normalize_data
 from accuracy_metrics import cls_report
 from feature_extraction import mean_values_extraction
 from preprocess_data import Preprocessed_data
-import pickle
 
 
 def nearest_centroid_experiment(pd: Preprocessed_data, PCA=False, mean_data=False):
