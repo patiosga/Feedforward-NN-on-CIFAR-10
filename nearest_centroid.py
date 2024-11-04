@@ -7,6 +7,7 @@ from normalize_data import normalize_data
 from accuracy_metrics import cls_report
 from feature_extraction import mean_values_extraction
 from preprocess_data import Preprocessed_data
+import pickle
 
 
 def nearest_centroid_experiment(pd: Preprocessed_data, PCA=False, mean_data=False):
@@ -22,7 +23,8 @@ def nearest_centroid_experiment(pd: Preprocessed_data, PCA=False, mean_data=Fals
     else:
         data = pd.training_data
         test_data = pd.test_data
-                                      
+
+    # print(data.shape)                      
     # Create and fit k-NN classifier
     nearest_centroid = NearestCentroid()
     nearest_centroid.fit(data, pd.training_labels)
@@ -36,11 +38,13 @@ def nearest_centroid_experiment(pd: Preprocessed_data, PCA=False, mean_data=Fals
 
 
 def main():
-    training_data, training_labels = read_data()
-    test_data, test_labels = read_test_data()
+    # training_data, training_labels = read_data()
+    # test_data, test_labels = read_test_data()
 
-    processed_data = Preprocessed_data(training_data, training_labels, test_data, test_labels)
-    processed_data.preprocess_data()
+    processed_data: Preprocessed_data = Preprocessed_data.read_from_pickle_file()
+ 
+    # print(processed_data.pca_data.shape)
+    # print(processed_data.pca_data)
 
     class_report_before_pca = nearest_centroid_experiment(processed_data)
     class_report_after_pca = nearest_centroid_experiment(processed_data, PCA=True)

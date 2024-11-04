@@ -2,6 +2,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 from read_data import read_data
 
+
 def normalize_data(data):
     # Create a StandardScaler object
     scaler = StandardScaler(with_mean=True, with_std=True)  # z-score normalization

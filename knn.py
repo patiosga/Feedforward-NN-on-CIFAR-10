@@ -22,7 +22,8 @@ def knn_experiment(pd: Preprocessed_data, neighbors, PCA=False, mean_data=False)
     else:
         data = pd.training_data
         test_data = pd.test_data
-                                      
+
+    # print(data.shape)                             
     # Create and fit k-NN classifier
     knn = KNeighborsClassifier(n_neighbors=neighbors)
     knn.fit(data, pd.training_labels)
@@ -60,11 +61,9 @@ def run_knn(pd: Preprocessed_data, neighbors):
 
 
 def main():
-    training_data, training_labels = read_data()
-    test_data, test_labels = read_test_data()
+    # Κατευθείαν από το pickle file
+    processed_data = Preprocessed_data.read_from_pickle_file()
 
-    processed_data = Preprocessed_data(training_data, training_labels, test_data, test_labels)
-    processed_data.preprocess_data()
     # Run k-NN classification
     run_knn(processed_data, 1)
     run_knn(processed_data, 3)
