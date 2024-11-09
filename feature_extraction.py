@@ -1,6 +1,8 @@
 from read_data import read_data
 from normalize_data import normalize_data
 import numpy as np
+import torch
+import torch.nn.functional as F
 
 
 def preprocess_data(data: np.ndarray) -> np.ndarray:
@@ -46,16 +48,44 @@ def mean_values_extraction(data):
     return mean_values
 
 
+def get_avg_pixel_brightness(data):
+    """
+    Extract the colour values from the data.
+    """
+    # Create a 3D NumPy array of shape (50000, 32, 32) for the red, green, or blue channel
+    data_3d = preprocess_data(data)
+    
+    # Calculate the average brightness of each pixel
+    avg_pixel_brightness = data_3d.mean(axis=1)  # μέση τιμή για κάθε pixel --> (50000)x32x32
+
+    return avg_pixel_brightness
+
+
+def compress_images(data):
+    """
+    Get one average pixel for each 2x2 square of pixels
+    """
+    # Create a 3D NumPy array of shape (50000, 32, 32) for the red, green, or blue channel
+    data_3d = preprocess_data(data)
+    new_data = np.empty((50000, 3, 16, 16))
+    for i in range(data_3d.shape[0]):
+        image = torch.tensor(data_3d[i], dtype=torch.float32)
+        new_data[i] = np.array(F.avg_pool2d(image, kernel_size=2, stride=2))  # average pooling
+    print(new_data.shape)  # (50000, 3, 16, 16)
+
+    return new_data
+
+
+
+    
+
+
 def main():
     # Read CIFAR-10 training data
     data, labels = read_data()
-    print(data.shape)  # (50000, 3072)
-    print(labels.shape)  # (50000,)
-
-    flattened_mean_data = mean_values_extraction(data)
-
-    print(flattened_mean_data.shape)  # (192,)
-    print(flattened_mean_data)
+    
+    data = compress_images(data)
+    print(data.shape)
     
 
 if __name__ == '__main__': 

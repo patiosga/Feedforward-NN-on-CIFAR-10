@@ -11,12 +11,12 @@ class Preprocessed_data():
         self.training_data = training_data
         self.training_labels = training_labels
         self.test_data = test_data
-        self.test_labels = np.array(test_labels)
+        self.test_labels = np.array(test_labels)  # για καποιον λογο το επαιρνε ως λιστα και οχι ως numpy array
 
     def preprocess_data(self):
         # Normalize the data
-        self.training_data = normalize_data(self.training_data)
-        self.test_data = normalize_data(self.test_data)
+        # self.training_data = normalize_data(self.training_data)
+        # self.test_data = normalize_data(self.test_data)
 
         # PCA decomposition - Πρώτα PCA και έπειτα κανονικοποίηση
         self.pca_data = (pca_decomposition(self.training_data, var.pca_components))
@@ -32,6 +32,10 @@ class Preprocessed_data():
         # Combination of pca and mean data - normalized pca features για να μην εχουν μεγάλες τιμές σε σχέση με τα mean values
         self.all_data_normalized = np.concatenate((normalize_data(self.pca_data), self.normalized_mean_data), axis=1)
         self.all_test_data_normalized = np.concatenate((normalize_data(self.pca_test_data), self.normalized_mean_test_data), axis=1)  # στο axis=1 γιατί θέλουμε να ενώσουμε τα δεδομένα κατά μήκος του δεύτερου αξονα
+
+        # One hot encoding of the labels
+        self.one_hot_training_labels = np.eye(var.num_of_classes)[self.training_labels]  # διαλέγει τις training_label γραμμές από τον μοναδιαίο πίνακα 
+        self.one_hot_test_labels = np.eye(var.num_of_classes)[self.test_labels]
 
     @staticmethod
     def write_to_pickle_file(data_object: 'Preprocessed_data'):
