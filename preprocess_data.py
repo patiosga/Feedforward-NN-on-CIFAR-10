@@ -15,28 +15,21 @@ class Preprocessed_data():
 
     def preprocess_data(self):
         # Normalize the data
-        # self.training_data = normalize_data(self.training_data)
-        # self.test_data = normalize_data(self.test_data)
+        self.training_data /= 255.0
+        self.test_data /= 255.0
 
-        # PCA decomposition - Πρώτα PCA και έπειτα κανονικοποίηση
-        self.pca_data = (pca_decomposition(self.training_data, var.pca_components))
-        self.pca_test_data = (pca_decomposition(self.test_data, var.pca_components))
-
-        # Mean data extraction
-        mean_data = mean_values_extraction(self.training_data)
-        mean_test_data = mean_values_extraction(self.test_data)
-
-        self.normalized_mean_data: np.ndarray = normalize_data(mean_data)
-        self.normalized_mean_test_data: np.ndarray = normalize_data(mean_test_data)
-
-        # Combination of pca and mean data - normalized pca features για να μην εχουν μεγάλες τιμές σε σχέση με τα mean values
-        self.all_data_normalized = np.concatenate((normalize_data(self.pca_data), self.normalized_mean_data), axis=1)
-        self.all_test_data_normalized = np.concatenate((normalize_data(self.pca_test_data), self.normalized_mean_test_data), axis=1)  # στο axis=1 γιατί θέλουμε να ενώσουμε τα δεδομένα κατά μήκος του δεύτερου αξονα
 
         # One hot encoding of the labels
         self.one_hot_training_labels = np.eye(var.num_of_classes)[self.training_labels]  # διαλέγει τις training_label γραμμές από τον μοναδιαίο πίνακα 
         self.one_hot_test_labels = np.eye(var.num_of_classes)[self.test_labels]
 
+    @staticmethod
+    def create_3d_data(data: np.ndarray) -> np.ndarray:
+        # Create a 3D NumPy array of shape (50000, 32, 32) for the red, green, or blue channel
+        data_3d = data.reshape(-1, 3, 32, 32)
+        # print(data_3d.shape)  # (50000, 3, 32, 32)
+        return data_3d
+    
     @staticmethod
     def write_to_pickle_file(data_object: 'Preprocessed_data'):
         with open('preprocessed_data.pkl', 'wb') as f:

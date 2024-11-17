@@ -9,5 +9,5 @@ def accuracy(test_labels, predicted_labels):
 
 def cls_report(test_labels, predicted_labels):
     # Αναλυτική αναφορά ταξινόμησης (precision, recall, f1-score, support) για κάθε κλάση ξεχωριστά
-    report = classification_report(test_labels, predicted_labels)
+    report = classification_report(test_labels, predicted_labels, zero_division=1)
     return report
