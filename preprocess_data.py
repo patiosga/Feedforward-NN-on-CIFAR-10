@@ -1,8 +1,6 @@
 import numpy as np
 import variables as var
-from pca_analysis import pca_decomposition
 from normalize_data import normalize_data
-from mean_values_extraction import mean_values_extraction
 from sklearn.model_selection import train_test_split
 from read_data import read_data, read_test_data
 import pickle

@@ -100,7 +100,7 @@ class Model_trainer:
         self.pdd = Preprocessed_data(training_data, training_labels, test_data, test_labels)
         self.pdd.X_train = Preprocessed_data.create_3d_data(self.pdd.X_train)
         self.pdd.X_test = Preprocessed_data.create_3d_data(self.pdd.X_test)
-        self.pdd.split_data(test_size=0.6)
+        self.pdd.split_data(test_size=0.2)
         self.pdd.convert_to_tensor()
 
         # Αντιγράφω τα δεδομένα στις μεταβλητές της κλάσης για ευκολία
@@ -194,10 +194,11 @@ class Model_trainer:
 
         # Learning rate reduction
         plt.plot(epochs, self.LR_values, label='Learning Rate')
+        plt.yscale('log', base=2)  # αλλάζω την κλίμακα του y αξονα γιατί αλλιώς δεν φαίνονται καλά τα αποτελέσματα
         plt.title("Learning Rate Reduction")
         plt.xlabel('Epochs')
         plt.ylabel('LR')
-        plt.ylim((0, 0.0011))
+        plt.ylim(0)
         plt.legend()
         plt.show()
 
@@ -209,6 +210,7 @@ class Model_trainer:
     def load_model_from_file(self):
         self.model.load_state_dict(torch.load('cifar10_main_model.pth'))
         self.model.eval()
+        return self.model
 
 
     def run(self, load_model=False, process_data=True):
@@ -219,20 +221,16 @@ class Model_trainer:
             self.load_model_from_file()  # παίρνω το αρχείο από τον δίσκο -- by default κάνει train νέο μοντέλο
         else:
             self.train()
-            # self.write_model_to_file()  # αποθηκεύω το μοντέλο στον δίσκο
-            # self.plot_training_progress()  # πλοτάρω την πρόοδο του μοντέλου
+            self.write_model_to_file()  # αποθηκεύω το μοντέλο στον δίσκο
+            self.plot_training_progress()  # πλοτάρω την πρόοδο του μοντέλου
 
         return self.test()
         
     
 
 def main():
-    trainer = Model_trainer(epochs=5)
-    batch_values = [2**i for i in range(2, 7)]
-    test_results = []
-    time_results = []
-    for value in batch_values:
-        test_results.append(trainer.run(load_model=False, batch_size=batch_values[value]))
+    trainer = Model_trainer(epochs=25)
+    print(trainer.run(load_model=False))
 
 
 
