@@ -1,5 +1,6 @@
 from sklearn.metrics import classification_report
 import numpy as np
+import variables as var
 
 
 def accuracy(test_labels, predicted_labels):

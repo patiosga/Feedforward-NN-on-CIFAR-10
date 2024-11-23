@@ -13,6 +13,7 @@ def normalize_data(data):
     return data_normalized
 
 
+
 def main():
     data, _ = read_data()
     print(data)  # (50000, 3072)

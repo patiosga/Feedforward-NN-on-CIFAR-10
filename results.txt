@@ -58,3 +58,174 @@ Number of neighbors = 3
     accuracy                           0.33     10000
    macro avg       0.43      0.33      0.32     10000
 weighted avg       0.43      0.33      0.32     10000
+
+
+
+Epoch 1
+LR value used: 0.001
+End of 1, training accuracy 0.606374979019165, validation set accuracy 0.5940999984741211
+Epoch 2
+LR value used: 0.001
+End of 2, training accuracy 0.654325008392334, validation set accuracy 0.6305999755859375
+Epoch 3
+LR value used: 0.001
+End of 3, training accuracy 0.6725500226020813, validation set accuracy 0.6341000199317932
+Epoch 4
+LR value used: 0.001
+End of 4, training accuracy 0.6993250250816345, validation set accuracy 0.6541000008583069
+Epoch 5
+LR value used: 0.001
+End of 5, training accuracy 0.7112249732017517, validation set accuracy 0.6597999930381775
+Epoch 6
+LR value used: 0.001
+End of 6, training accuracy 0.7222750186920166, validation set accuracy 0.6650999784469604
+Epoch 7
+LR value used: 0.001
+End of 7, training accuracy 0.7317500114440918, validation set accuracy 0.6674000024795532
+Epoch 8
+LR value used: 0.001
+End of 8, training accuracy 0.7379999756813049, validation set accuracy 0.6718999743461609
+Epoch 9
+LR value used: 0.001
+End of 9, training accuracy 0.7402250170707703, validation set accuracy 0.6664999723434448
+Epoch 10
+LR value used: 0.001
+End of 10, training accuracy 0.7491999864578247, validation set accuracy 0.6697999835014343
+Epoch 11
+LR value used: 0.001
+End of 11, training accuracy 0.7535499930381775, validation set accuracy 0.6710000038146973
+Epoch 12
+LR value used: 0.0005
+End of 12, training accuracy 0.774649977684021, validation set accuracy 0.6833000183105469
+Epoch 13
+LR value used: 0.0005
+End of 13, training accuracy 0.7776749730110168, validation set accuracy 0.680899977684021
+Epoch 14
+LR value used: 0.0005
+End of 14, training accuracy 0.7792500257492065, validation set accuracy 0.6743999719619751
+Epoch 15
+LR value used: 0.0005
+End of 15, training accuracy 0.7836499810218811, validation set accuracy 0.6728000044822693
+Epoch 16
+LR value used: 0.00025
+End of 16, training accuracy 0.7919250130653381, validation set accuracy 0.6790000200271606
+Epoch 17
+LR value used: 0.00025
+End of 17, training accuracy 0.7952499985694885, validation set accuracy 0.6861000061035156
+Epoch 18
+LR value used: 0.00025
+End of 18, training accuracy 0.7973750233650208, validation set accuracy 0.6837999820709229
+Epoch 19
+LR value used: 0.000125
+End of 19, training accuracy 0.802299976348877, validation set accuracy 0.6855000257492065
+Epoch 20
+LR value used: 0.000125
+End of 20, training accuracy 0.8068749904632568, validation set accuracy 0.6848000288009644
+Epoch 21
+LR value used: 0.000125
+End of 21, training accuracy 0.8041250109672546, validation set accuracy 0.6898999810218811
+Epoch 22
+LR value used: 0.000125
+End of 22, training accuracy 0.8058249950408936, validation set accuracy 0.6886000037193298
+Epoch 23
+LR value used: 0.000125
+End of 23, training accuracy 0.806725025177002, validation set accuracy 0.6840000152587891
+Epoch 24
+LR value used: 0.000125
+End of 24, training accuracy 0.805774986743927, validation set accuracy 0.6886000037193298
+Epoch 25
+LR value used: 6.25e-05
+End of 25, training accuracy 0.8095999956130981, validation set accuracy 0.6844000220298767
+Epoch 26
+LR value used: 6.25e-05
+End of 26, training accuracy 0.8109750151634216, validation set accuracy 0.684499979019165
+Epoch 27
+LR value used: 6.25e-05
+End of 27, training accuracy 0.8116499781608582, validation set accuracy 0.6898000240325928
+Epoch 28
+LR value used: 3.125e-05
+End of 28, training accuracy 0.8162750005722046, validation set accuracy 0.6869999766349792
+Epoch 29
+LR value used: 3.125e-05
+End of 29, training accuracy 0.8132249712944031, validation set accuracy 0.6801000237464905
+Epoch 30
+LR value used: 3.125e-05
+End of 30, training accuracy 0.8138999938964844, validation set accuracy 0.6814000010490417
+Epoch 31
+LR value used: 1.5625e-05
+End of 31, training accuracy 0.8122749924659729, validation set accuracy 0.6830999851226807
+Epoch 32
+LR value used: 1.5625e-05
+End of 32, training accuracy 0.8132249712944031, validation set accuracy 0.6837000250816345
+Epoch 33
+LR value used: 1.5625e-05
+End of 33, training accuracy 0.8141999840736389, validation set accuracy 0.6858000159263611
+Epoch 34
+LR value used: 7.8125e-06
+End of 34, training accuracy 0.8141999840736389, validation set accuracy 0.6880000233650208
+Epoch 35
+LR value used: 7.8125e-06
+End of 35, training accuracy 0.8133249878883362, validation set accuracy 0.6802999973297119
+Epoch 36
+LR value used: 7.8125e-06
+End of 36, training accuracy 0.8132749795913696, validation set accuracy 0.6863999962806702
+Epoch 37
+LR value used: 3.90625e-06
+End of 37, training accuracy 0.8102499842643738, validation set accuracy 0.6833999752998352
+Epoch 38
+LR value used: 3.90625e-06
+End of 38, training accuracy 0.8162000179290771, validation set accuracy 0.6850000023841858
+Epoch 39
+LR value used: 3.90625e-06
+End of 39, training accuracy 0.8144500255584717, validation set accuracy 0.6894999742507935
+Epoch 40
+LR value used: 1.953125e-06
+End of 40, training accuracy 0.8159250020980835, validation set accuracy 0.6848999857902527
+Epoch 41
+LR value used: 1.953125e-06
+End of 41, training accuracy 0.8143500089645386, validation set accuracy 0.6843000054359436
+Epoch 42
+LR value used: 1.953125e-06
+End of 42, training accuracy 0.8154749870300293, validation set accuracy 0.6847000122070312
+Epoch 43
+LR value used: 9.765625e-07
+End of 43, training accuracy 0.8114749789237976, validation set accuracy 0.6901999711990356
+Epoch 44
+LR value used: 9.765625e-07
+End of 44, training accuracy 0.8164499998092651, validation set accuracy 0.6891000270843506
+Epoch 45
+LR value used: 9.765625e-07
+End of 45, training accuracy 0.8141999840736389, validation set accuracy 0.6858000159263611
+Epoch 46
+LR value used: 4.8828125e-07
+End of 46, training accuracy 0.8147249817848206, validation set accuracy 0.6766999959945679
+Epoch 47
+LR value used: 4.8828125e-07
+End of 47, training accuracy 0.8145999908447266, validation set accuracy 0.685699999332428
+Epoch 48
+LR value used: 4.8828125e-07
+End of 48, training accuracy 0.812749981880188, validation set accuracy 0.6855999827384949
+Epoch 49
+LR value used: 2.44140625e-07
+End of 49, training accuracy 0.8127250075340271, validation set accuracy 0.6848000288009644
+Epoch 50
+LR value used: 2.44140625e-07
+End of 50, training accuracy 0.8158749938011169, validation set accuracy 0.682699978351593
+              precision    recall  f1-score   support
+
+    airplane       0.71      0.70      0.71      1000
+  automobile       0.80      0.81      0.80      1000
+        bird       0.58      0.55      0.56      1000
+         cat       0.50      0.49      0.50      1000
+        deer       0.61      0.65      0.63      1000
+         dog       0.59      0.60      0.59      1000
+        frog       0.75      0.76      0.76      1000
+       horse       0.76      0.75      0.75      1000
+        ship       0.79      0.79      0.79      1000
+       truck       0.76      0.76      0.76      1000
+
+    accuracy                           0.69     10000
+   macro avg       0.69      0.69      0.69     10000
+weighted avg       0.69      0.69      0.69     10000
+
+TEST ACCURACY: tensor(0.6853)
