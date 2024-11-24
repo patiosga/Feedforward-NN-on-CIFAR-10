@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 
 from preprocess_data import Preprocessed_data
 from read_data import read_data, read_test_data
@@ -17,7 +18,7 @@ class CIFAR10Model(nn.Module):
             first_layer = 2*n  # 32 default
             second_layer = n
             third_layer = n**2  # 256
-            forth_layer = n**2 // 2  # 128
+            fourth_layer = n**2 // 2  # 128
             self.model = nn.Sequential(
                 nn.Conv2d(input_channels, first_layer, kernel_size=3, padding=1),
                 nn.BatchNorm2d(first_layer),
@@ -36,12 +37,12 @@ class CIFAR10Model(nn.Module):
                 nn.ReLU(),
                 nn.Dropout(0.3),
 
-                nn.Linear(third_layer, forth_layer),
-                nn.BatchNorm1d(forth_layer),
+                nn.Linear(third_layer, fourth_layer),
+                nn.BatchNorm1d(fourth_layer),
                 nn.ReLU(),
                 nn.Dropout(0.3),
 
-                nn.Linear(forth_layer, output_size),
+                nn.Linear(fourth_layer, output_size)
             )
         else: 
             self.model = model
@@ -229,8 +230,10 @@ class Model_trainer:
     
 
 def main():
-    trainer = Model_trainer(epochs=25)
+    start = time.time()
+    trainer = Model_trainer(epochs=10)
     print(trainer.run(load_model=False))
+    print("Time taken: ", time.time()-start)  # Για καλύτερη χρονομέτρηση γίνονται comment out στη run() οι μέθοδοι write_model_to_file() και plot_training_progress()
 
 
 

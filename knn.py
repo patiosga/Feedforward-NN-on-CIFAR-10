@@ -1,6 +1,7 @@
 from sklearn.neighbors import KNeighborsClassifier
 from read_data import read_data, read_test_data
 from accuracy_metrics import cls_report
+import time
 
 
 # Perform k-NN classification on the CIFAR-10 dataset before and after PCA
@@ -33,8 +34,17 @@ def main():
     test_data, test_labels = read_test_data()
 
     # Run k-NN classification
+    # Time the k-NN classification
+    start = time.time()
     run_knn(training_data, training_labels, test_data, test_labels, 1)
+    end = time.time()
+    print(f'k-NN classification took {end - start} seconds')
+    start = time.time()
     run_knn(training_data, training_labels, test_data, test_labels, 3)
+    end = time.time()
+    print(f'k-NN classification took {end - start} seconds')
+    
+
 
 
 if __name__ == '__main__':
