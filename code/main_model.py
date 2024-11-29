@@ -231,7 +231,7 @@ class Model_trainer:
 
 def main():
     start = time.time()
-    trainer = Model_trainer(epochs=10)
+    trainer = Model_trainer(epochs=5)
     print(trainer.run(load_model=False))
     print("Time taken: ", time.time()-start)  # Για καλύτερη χρονομέτρηση γίνονται comment out στη run() οι μέθοδοι write_model_to_file() και plot_training_progress()
 
