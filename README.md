@@ -43,9 +43,6 @@ the results and findings, which are detailed in the [final report](report.pdf).
 The model achieves an accuracy of approximately 70% on the CIFAR-10 test set. Further improvements can be made by tuning hyperparameters and experimenting with different architectures as  
 it is discussed in the report.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
 
